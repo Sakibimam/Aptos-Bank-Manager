@@ -53,8 +53,9 @@ export function WalletSelector(walletSortingOptions: WalletSortingOptions) {
         if (!account?.address) return;
         try {
             await navigator.clipboard.writeText(account.address);
+            // Optional: You can add a toast notification here if needed
         } catch (error) {
-            console.log("Error !!!", error);
+            console.error("Failed to copy address:", error);
         }
     }, [account?.address]);
 

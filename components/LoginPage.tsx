@@ -121,18 +121,34 @@ export function LoginPage() {
                   placeholder="Enter Aptos address"
                   value={userInput}
                   onChange={(e) => setUserInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && userInput && !loading) {
+                      handleConnect();
+                    }
+                  }}
                 />
               </TabsContent>
               <TabsContent value="name">
                 <Input
                   type="text"
-                  placeholder="Enter Aptos name (e.g., kaveri.apt)"
+                  placeholder="Enter Aptos name (e.g., sakib.apt)"
                   value={userInput}
                   onChange={(e) => setUserInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && userInput && !loading) {
+                      handleConnect();
+                    }
+                  }}
                 />
               </TabsContent>
             </Tabs>
-            <Button onClick={handleConnect}>{loading ? 'Fetching Data...' : 'Explore'}</Button>
+            <Button 
+              onClick={handleConnect} 
+              disabled={loading || !userInput}
+              className="w-full"
+            >
+              {loading ? 'Fetching Data...' : 'Explore'}
+            </Button>
             <div className="mt-4 text-center text-sm">
               Reach out to us for any query.
               <SocialIcons />
